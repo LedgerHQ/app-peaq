@@ -6,6 +6,7 @@
     "error": "",
     "message": {
       "Receiver": "0xbeef0d9350f10c1f4d06e2eef61aa13d157849fe",
+      "Coin asset": "peaq",
       "Amount": "AGUS 332.579999113809559552",
       "Nonce": "3896",
       "GasLimit": "2035876",
@@ -24,6 +25,7 @@
     "error": "",
     "message": {
       "Receiver": "0x5d67b9111192a620590a583df31a9b7303214768",
+      "Coin asset": "peaq",
       "Amount": "AGUS 436.883960456029732864",
       "Nonce": "1265",
       "GasLimit": "1701572",
@@ -42,6 +44,7 @@
     "error": "",
     "message": {
       "Receiver": "0xc59564435f2fcb23d89ecf0b0fb58cdbc52d779e",
+      "Coin asset": "peaq",
       "Amount": "AGUS 189.497053893980291072",
       "Nonce": "1907",
       "GasLimit": "1561143",
@@ -60,6 +63,7 @@
     "error": "",
     "message": {
       "Receiver": "0x66325a3b1a2fc1227bd33302a942b774d7fd7829",
+      "Coin asset": "peaq",
       "Amount": "AGUS 256.08246421789016064",
       "Nonce": "1815",
       "GasLimit": "1671369",
@@ -78,6 +82,7 @@
     "error": "",
     "message": {
       "Receiver": "0x6a3eb9c2d507c29856f76e673976b430c47018b4",
+      "Coin asset": "peaq",
       "Amount": "AGUS 153.343785710587609088",
       "Nonce": "1304",
       "GasLimit": "2831687",
@@ -96,6 +101,7 @@
     "error": "",
     "message": {
       "Receiver": "0x8d433a29b31b97af1e8e82d4340abd4938d3a165",
+      "Coin asset": "peaq",
       "Amount": "AGUS 471.805024447420891136",
       "Nonce": "3621",
       "GasLimit": "2188923",
@@ -114,6 +120,7 @@
     "error": "",
     "message": {
       "Receiver": "0x01ef3832d56781a6e7099c719477e4b0f1a1660a",
+      "Coin asset": "peaq",
       "Amount": "AGUS 426.211305545848520704",
       "Nonce": "871",
       "GasLimit": "2485700",
@@ -132,6 +139,7 @@
     "error": "",
     "message": {
       "Receiver": "0x852fa358ffdc668409c0c7da62279c5da77d5358",
+      "Coin asset": "peaq",
       "Amount": "AGUS 198.979982109489430528",
       "Nonce": "2053",
       "GasLimit": "2246807",
@@ -150,6 +158,7 @@
     "error": "",
     "message": {
       "Receiver": "0xf7b72d39e1093914687b0512ba7e26d1fd561711",
+      "Coin asset": "peaq",
       "Amount": "AGUS 363.414637061430181888",
       "Nonce": "4585",
       "GasLimit": "1850473",
@@ -168,6 +177,7 @@
     "error": "",
     "message": {
       "Receiver": "0x5242c75a2c772092f823c38c94c7187fe54fdc91",
+      "Coin asset": "peaq",
       "Amount": "AGUS 307.429311318251667456",
       "Nonce": "2451",
       "GasLimit": "1670252",
@@ -186,6 +196,7 @@
     "error": "",
     "message": {
       "Receiver": "0x6921db58a842c2ab1069aad91aa7bc22ac137e44",
+      "Coin asset": "peaq",
       "Amount": "AGUS 132.735111701156265984",
       "Nonce": "884",
       "GasLimit": "2821460",
@@ -204,6 +215,7 @@
     "error": "",
     "message": {
       "Receiver": "0x9b1bef758c922040f33e3a856d6e0e6f76425bc9",
+      "Coin asset": "peaq",
       "Amount": "AGUS 417.274171043573661696",
       "Nonce": "369",
       "GasLimit": "2338295",
@@ -222,6 +234,7 @@
     "error": "",
     "message": {
       "Receiver": "0xfe60f592a62768427c5b436674d22bc43cb742e9",
+      "Coin asset": "peaq",
       "Amount": "AGUS 75.201071275546312704",
       "Nonce": "4126",
       "GasLimit": "2065958",
@@ -240,6 +253,7 @@
     "error": "",
     "message": {
       "Receiver": "0x64ba8b4b7a90cecf135f50f4d1c7a891146c5a4e",
+      "Coin asset": "peaq",
       "Amount": "AGUS 298.578910977516240896",
       "Nonce": "1834",
       "GasLimit": "2771168",
@@ -258,6 +272,7 @@
     "error": "",
     "message": {
       "Receiver": "0x36483db08e6b2127e635168559be2f1394281321",
+      "Coin asset": "peaq",
       "Amount": "AGUS 475.250716717241729024",
       "Nonce": "4436",
       "GasLimit": "2611694",
@@ -276,6 +291,7 @@
     "error": "",
     "message": {
       "Receiver": "0x37b4171bd4b2b47f869bec4ee2ab9b2787561465",
+      "Coin asset": "peaq",
       "Amount": "AGUS 68.251673799789805568",
       "Nonce": "1790",
       "GasLimit": "2068089",
@@ -294,6 +310,7 @@
     "error": "",
     "message": {
       "Receiver": "0xb9d80e6cbb940c9800a43235875cbdddee540182",
+      "Coin asset": "peaq",
       "Amount": "AGUS 86.603195756563939328",
       "Nonce": "4652",
       "GasLimit": "2309561",
@@ -312,6 +329,7 @@
     "error": "",
     "message": {
       "Receiver": "0x0aba050aec0b6ef277a106c60651d88f9b566799",
+      "Coin asset": "peaq",
       "Amount": "AGUS 26.692040014710259712",
       "Nonce": "3336",
       "GasLimit": "2561411",
@@ -330,6 +348,7 @@
     "error": "",
     "message": {
       "Receiver": "0x03e34b7cde5a0895abc800663b8cb6b0d364b4ab",
+      "Coin asset": "peaq",
       "Amount": "AGUS 287.859297720341594112",
       "Nonce": "4261",
       "GasLimit": "2805143",
@@ -348,6 +367,7 @@
     "error": "",
     "message": {
       "Receiver": "0x382221359696aba4adcab3134a75dfa38db19501",
+      "Coin asset": "peaq",
       "Amount": "AGUS 192.429376158725341184",
       "Nonce": "2561",
       "GasLimit": "1941445",
@@ -366,6 +386,7 @@
     "error": "",
     "message": {
       "Receiver": "0x65fdaa77d547ba33f511536da06b4c0b27aac88d",
+      "Coin asset": "peaq",
       "Amount": "AGUS 450.622662213972525056",
       "Nonce": "579",
       "GasLimit": "1840514",
@@ -384,6 +405,7 @@
     "error": "",
     "message": {
       "Receiver": "0xb0dacb4d469fafac422253a4bd1e58c9caf3a166",
+      "Coin asset": "peaq",
       "Amount": "AGUS 70.858783960033755136",
       "Nonce": "3224",
       "GasLimit": "2017467",
@@ -402,6 +424,7 @@
     "error": "",
     "message": {
       "Receiver": "0xe5c78ce6a489448094b7f7fb77e060e80cc3f9a8",
+      "Coin asset": "peaq",
       "Amount": "AGUS 324.94796679599521792",
       "Nonce": "1483",
       "GasLimit": "2198990",
@@ -420,6 +443,7 @@
     "error": "",
     "message": {
       "Receiver": "0x66600ea81c6aa89d7af1886e9bc72af723a5fa37",
+      "Coin asset": "peaq",
       "Amount": "AGUS 236.382693127309295616",
       "Nonce": "3294",
       "GasLimit": "2628985",
@@ -438,6 +462,7 @@
     "error": "",
     "message": {
       "Receiver": "0xe38467ac9b1dae486c2317e7882ccb36c8a6d139",
+      "Coin asset": "peaq",
       "Amount": "AGUS 241.383983430415122432",
       "Nonce": "4007",
       "GasLimit": "2985580",
@@ -456,6 +481,7 @@
     "error": "",
     "message": {
       "Receiver": "0xfef8d0e6a0fab1c10a36af8043a0db5cae1d3e14",
+      "Coin asset": "peaq",
       "Amount": "AGUS 311.97194783596904448",
       "Nonce": "4001",
       "MaxPriorityFeePerGas": "2959165",
@@ -475,6 +501,7 @@
     "error": "",
     "message": {
       "Receiver": "0x8ce5730c9072987c488e3f02484775b1ddf1dd74",
+      "Coin asset": "peaq",
       "Amount": "AGUS 87.839118526458544128",
       "Nonce": "58",
       "MaxPriorityFeePerGas": "2550745",
@@ -494,6 +521,7 @@
     "error": "",
     "message": {
       "Receiver": "0x6bad47564e1a5467be8abc77ef115f9c9531e181",
+      "Coin asset": "peaq",
       "Amount": "AGUS 434.133714783503384576",
       "Nonce": "2038",
       "MaxPriorityFeePerGas": "2708991",
@@ -513,6 +541,7 @@
     "error": "",
     "message": {
       "Receiver": "0x3fe017a91a722d157f0779ef9d1253c149fe0791",
+      "Coin asset": "peaq",
       "Amount": "AGUS 8.726576125364093952",
       "Nonce": "1996",
       "MaxPriorityFeePerGas": "1603809",
@@ -532,6 +561,7 @@
     "error": "",
     "message": {
       "Receiver": "0x4e3409511dbadaa314562a89d7c3fdc74cb3e222",
+      "Coin asset": "peaq",
       "Amount": "AGUS 59.164353271654367232",
       "Nonce": "2067",
       "MaxPriorityFeePerGas": "2210936",
@@ -551,6 +581,7 @@
     "error": "",
     "message": {
       "Receiver": "0xd6eb8b39ef2f1e799aece21a7e89996799b14653",
+      "Coin asset": "peaq",
       "Amount": "AGUS 285.0577078172786688",
       "Nonce": "3854",
       "MaxPriorityFeePerGas": "2183123",
@@ -570,6 +601,7 @@
     "error": "",
     "message": {
       "Receiver": "0x58e4608523298feea91442a8cd3f384eda377d5f",
+      "Coin asset": "peaq",
       "Amount": "AGUS 95.079601045819588608",
       "Nonce": "4927",
       "MaxPriorityFeePerGas": "2037873",
@@ -589,6 +621,7 @@
     "error": "",
     "message": {
       "Receiver": "0x6ad628e16677fa79534828d2a4eeb052db5b0393",
+      "Coin asset": "peaq",
       "Amount": "AGUS 426.60035114175889408",
       "Nonce": "2301",
       "MaxPriorityFeePerGas": "1604351",
@@ -608,6 +641,7 @@
     "error": "",
     "message": {
       "Receiver": "0xf37da8238cde861c17eeace6cb4d41044d68e11c",
+      "Coin asset": "peaq",
       "Amount": "AGUS 212.47115193629540352",
       "Nonce": "1429",
       "MaxPriorityFeePerGas": "1794762",
@@ -627,6 +661,7 @@
     "error": "",
     "message": {
       "Receiver": "0x9b0fd9579fe02b420d47801bd4993ed36f1d3daf",
+      "Coin asset": "peaq",
       "Amount": "AGUS 103.496825292679675904",
       "Nonce": "1165",
       "MaxPriorityFeePerGas": "2025758",
@@ -646,6 +681,7 @@
     "error": "",
     "message": {
       "Receiver": "0xd24bd3aced7ea0fdd298e18311dc22297823d50f",
+      "Coin asset": "peaq",
       "Amount": "AGUS 460.884379617234845696",
       "Nonce": "99",
       "MaxPriorityFeePerGas": "2626275",
@@ -665,6 +701,7 @@
     "error": "",
     "message": {
       "Receiver": "0x1a96be9af4f213a5893616135092c2a0f6f7192f",
+      "Coin asset": "peaq",
       "Amount": "AGUS 456.567680376137580544",
       "Nonce": "4064",
       "MaxPriorityFeePerGas": "1892527",
@@ -684,6 +721,7 @@
     "error": "",
     "message": {
       "Receiver": "0x38e3f176a424f896ba2811d5f1c538632c111611",
+      "Coin asset": "peaq",
       "Amount": "AGUS 341.921671119217360896",
       "Nonce": "704",
       "MaxPriorityFeePerGas": "2606013",
@@ -703,6 +741,7 @@
     "error": "",
     "message": {
       "Receiver": "0x309496f3aaba3541e133f10c6496d5160861b30d",
+      "Coin asset": "peaq",
       "Amount": "AGUS 406.130431578629799936",
       "Nonce": "3616",
       "MaxPriorityFeePerGas": "2990444",
@@ -722,6 +761,7 @@
     "error": "",
     "message": {
       "Receiver": "0x5e377c0cb8a8c457c6b20c80b049695c435a104c",
+      "Coin asset": "peaq",
       "Amount": "AGUS 468.159069725081141248",
       "Nonce": "4407",
       "MaxPriorityFeePerGas": "2482876",
@@ -741,6 +781,7 @@
     "error": "",
     "message": {
       "Receiver": "0x9262cdc81ba892a9b975f1bdec15850b5dbd2bcf",
+      "Coin asset": "peaq",
       "Amount": "AGUS 19.375823980847693824",
       "Nonce": "3933",
       "MaxPriorityFeePerGas": "2976447",
@@ -760,6 +801,7 @@
     "error": "",
     "message": {
       "Receiver": "0x76a3c73861e411050d323ae5705700b2c8a288dd",
+      "Coin asset": "peaq",
       "Amount": "AGUS 258.369773170761367552",
       "Nonce": "4887",
       "MaxPriorityFeePerGas": "2393504",
@@ -779,6 +821,7 @@
     "error": "",
     "message": {
       "Receiver": "0x08aec333f5599b6109a2a128fdb95f6109f4a843",
+      "Coin asset": "peaq",
       "Amount": "AGUS 70.2029732462680064",
       "Nonce": "4588",
       "MaxPriorityFeePerGas": "2457594",
@@ -798,6 +841,7 @@
     "error": "",
     "message": {
       "Receiver": "0x465d0960fc07f19cdfb79e431867f7f5cd14367b",
+      "Coin asset": "peaq",
       "Amount": "AGUS 224.258832077710262272",
       "Nonce": "1267",
       "MaxPriorityFeePerGas": "2843076",
@@ -817,6 +861,7 @@
     "error": "",
     "message": {
       "Receiver": "0x88fffe7eb0cc297b3b22f257a89584f3250ba538",
+      "Coin asset": "peaq",
       "Amount": "AGUS 349.977352253622452224",
       "Nonce": "349",
       "MaxPriorityFeePerGas": "2469491",
@@ -836,6 +881,7 @@
     "error": "",
     "message": {
       "Receiver": "0xc342265b28695fa2e82c40140bc0317f91e375f3",
+      "Coin asset": "peaq",
       "Amount": "AGUS 499.709635720696168448",
       "Nonce": "3497",
       "MaxPriorityFeePerGas": "2831116",
@@ -855,6 +901,7 @@
     "error": "",
     "message": {
       "Receiver": "0xe7ce1918869abebdb079c9224945911a528de67d",
+      "Coin asset": "peaq",
       "Amount": "AGUS 174.11528081577132032",
       "Nonce": "2761",
       "MaxPriorityFeePerGas": "2886143",
@@ -874,6 +921,7 @@
     "error": "",
     "message": {
       "Receiver": "0x643d1b2c3a7bfd76cc334f5f595fbd1cbe37da40",
+      "Coin asset": "peaq",
       "Amount": "AGUS 432.604773466016579584",
       "Nonce": "1614",
       "MaxPriorityFeePerGas": "2697747",
@@ -893,6 +941,7 @@
     "error": "",
     "message": {
       "Receiver": "0x466012dd763a47d30fc41c46c0cc7410e88aaae4",
+      "Coin asset": "peaq",
       "Amount": "AGUS 5.545089832857064448",
       "Nonce": "395",
       "MaxPriorityFeePerGas": "2270263",
@@ -912,6 +961,7 @@
     "error": "",
     "message": {
       "Receiver": "0x7f5c3839aa25e9fe69fa0d2e9e3704860a10e945",
+      "Coin asset": "peaq",
       "Amount": "AGUS 255.90621373493149696",
       "Nonce": "3386",
       "MaxPriorityFeePerGas": "2639181",
@@ -931,6 +981,7 @@
     "error": "",
     "message": {
       "Receiver": "0xea105552e8530683249f335b026474dafc58a228",
+      "Coin asset": "peaq",
       "Amount": "AGUS 255.19981414564151296",
       "Nonce": "4408",
       "GasLimit": "2253917",
@@ -949,6 +1000,7 @@
     "error": "",
     "message": {
       "Receiver": "0x138636fae0e36edefb5e37b20fcb424a787d6b01",
+      "Coin asset": "peaq",
       "Amount": "AGUS 211.677034630228803584",
       "Nonce": "2381",
       "GasLimit": "2806222",
@@ -967,6 +1019,7 @@
     "error": "",
     "message": {
       "Receiver": "0x0bbd7328cf00f2c88218519135819938152341a1",
+      "Coin asset": "peaq",
       "Amount": "AGUS 419.013379292542533632",
       "Nonce": "1743",
       "GasLimit": "1958794",
@@ -985,6 +1038,7 @@
     "error": "",
     "message": {
       "Receiver": "0x4c1132c0f6558d74c48fd733c6ab0500072cddf6",
+      "Coin asset": "peaq",
       "Amount": "AGUS 273.288801457259544576",
       "Nonce": "95",
       "GasLimit": "1963576",
@@ -1003,6 +1057,7 @@
     "error": "",
     "message": {
       "Receiver": "0x48431e85a14f5bb2f3a30fe0f0db215b3912650c",
+      "Coin asset": "peaq",
       "Amount": "AGUS 342.166170983974699008",
       "Nonce": "4603",
       "GasLimit": "2265905",
@@ -1021,6 +1076,7 @@
     "error": "",
     "message": {
       "Receiver": "0xcedd5b9830ed418a348c09af050f05c805554eac",
+      "Coin asset": "peaq",
       "Amount": "AGUS 201.215367218448564224",
       "Nonce": "4448",
       "GasLimit": "1889580",
@@ -1039,6 +1095,7 @@
     "error": "",
     "message": {
       "Receiver": "0x787a46ed54b48997f236872be82010e4e0c5e582",
+      "Coin asset": "peaq",
       "Amount": "AGUS 246.950612887592566784",
       "Nonce": "1603",
       "GasLimit": "1912070",
@@ -1057,6 +1114,7 @@
     "error": "",
     "message": {
       "Receiver": "0x4b5cdc8537f1ea528a80146fc5b6dd269081d004",
+      "Coin asset": "peaq",
       "Amount": "AGUS 61.089369030710157312",
       "Nonce": "4444",
       "GasLimit": "2709182",
@@ -1075,6 +1133,7 @@
     "error": "",
     "message": {
       "Receiver": "0x53e1706dc9254909ff864231ade620c5121915a8",
+      "Coin asset": "peaq",
       "Amount": "AGUS 263.314346400750567424",
       "Nonce": "4248",
       "GasLimit": "2139674",
@@ -1093,6 +1152,7 @@
     "error": "",
     "message": {
       "Receiver": "0x019918da057ab8a09fce0ce3109cc366230c82ee",
+      "Coin asset": "peaq",
       "Amount": "AGUS 75.877659278619787264",
       "Nonce": "4748",
       "GasLimit": "1649011",
@@ -1111,6 +1171,7 @@
     "error": "",
     "message": {
       "Receiver": "0x2d913629c1f95363ad0732e07267677ce602e301",
+      "Coin asset": "peaq",
       "Amount": "AGUS 1.812843131714814208",
       "Nonce": "174",
       "GasLimit": "2112828",
@@ -1129,6 +1190,7 @@
     "error": "",
     "message": {
       "Receiver": "0x50d0f18840ed4bb7c419f5f2ab4d72935f175cf4",
+      "Coin asset": "peaq",
       "Amount": "AGUS 384.039600088388206592",
       "Nonce": "981",
       "GasLimit": "1953446",
@@ -1147,6 +1209,7 @@
     "error": "",
     "message": {
       "Receiver": "0x3ea9b651a9cf072ee8a3e4274a6af8854244b584",
+      "Coin asset": "peaq",
       "Amount": "AGUS 274.667982588525543424",
       "Nonce": "596",
       "GasLimit": "2123775",
@@ -1165,6 +1228,7 @@
     "error": "",
     "message": {
       "Receiver": "0xe6d090178a624cd3e7e9ed8cc5bce570ba40cdbd",
+      "Coin asset": "peaq",
       "Amount": "AGUS 257.350191647547031552",
       "Nonce": "3398",
       "GasLimit": "1970760",
@@ -1183,6 +1247,7 @@
     "error": "",
     "message": {
       "Receiver": "0xad4b79ab6e63234895d38dfe844affbfcca95de7",
+      "Coin asset": "peaq",
       "Amount": "AGUS 75.890510735190704128",
       "Nonce": "667",
       "GasLimit": "2702205",
@@ -1201,6 +1266,7 @@
     "error": "",
     "message": {
       "Receiver": "0xb5386834f4d01a47d68ef120d2e30a8ad95ebb55",
+      "Coin asset": "peaq",
       "Amount": "AGUS 369.126913982842339328",
       "Nonce": "3540",
       "GasLimit": "2760525",
@@ -1219,6 +1285,7 @@
     "error": "",
     "message": {
       "Receiver": "0x5d89b14a49dcc6f699af313eaaaac0e88e4fef2e",
+      "Coin asset": "peaq", 
       "Amount": "AGUS 119.975353477259624448",
       "Nonce": "2330",
       "GasLimit": "2906311",
@@ -1237,6 +1304,7 @@
     "error": "",
     "message": {
       "Receiver": "0x9a80867b20889de2c9e10222b6dbf6aafd83350a",
+      "Coin asset": "peaq",
       "Amount": "AGUS 115.597299177956917248",
       "Nonce": "307",
       "GasLimit": "2172998",
@@ -1255,6 +1323,7 @@
     "error": "",
     "message": {
       "Receiver": "0x09569488eb156348369c3000746461179fd71bd1",
+      "Coin asset": "peaq",
       "Amount": "AGUS 228.992982710850224128",
       "Nonce": "135",
       "GasLimit": "2463648",
@@ -1273,6 +1342,7 @@
     "error": "",
     "message": {
       "Receiver": "0xee08e97df2c14e5b348ef347e24b7a1456075564",
+      "Coin asset": "peaq",
       "Amount": "AGUS 263.872855570788548608",
       "Nonce": "276",
       "GasLimit": "1829460",
@@ -1291,6 +1361,7 @@
     "error": "",
     "message": {
       "Receiver": "0x67ff5ed15932326b72a74bdce76c74165d18e631",
+      "Coin asset": "peaq",
       "Amount": "AGUS 365.83738960812670976",
       "Nonce": "1956",
       "GasLimit": "2799174",
@@ -1309,6 +1380,7 @@
     "error": "",
     "message": {
       "Receiver": "0x3e66553cb899bdee91f0564baa95dfc632eb0246",
+      "Coin asset": "peaq",
       "Amount": "AGUS 416.523727521917108224",
       "Nonce": "1129",
       "GasLimit": "2941250",
@@ -1327,6 +1399,7 @@
     "error": "",
     "message": {
       "Receiver": "0x2719ecd5e172979383c1766a27ef2e4456931171",
+      "Coin asset": "peaq",
       "Amount": "AGUS 270.9708040615043072",
       "Nonce": "1729",
       "GasLimit": "2097631",
@@ -1345,6 +1418,7 @@
     "error": "",
     "message": {
       "Receiver": "0xa489cef83b6cf434da65fda2d94efa58e098d0d4",
+      "Coin asset": "peaq",
       "Amount": "AGUS 80.891353002294214656",
       "Nonce": "2730",
       "GasLimit": "2080989",
@@ -1363,6 +1437,7 @@
     "error": "",
     "message": {
       "Receiver": "0x3d8f13095c21aa83845c91b8a1da0e309951de06",
+      "Coin asset": "peaq",
       "Amount": "AGUS 174.482402546937593856",
       "Nonce": "1513",
       "GasLimit": "2680950",

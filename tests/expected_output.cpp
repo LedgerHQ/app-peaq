@@ -68,6 +68,7 @@ std::vector<std::string> EVMGenerateExpectedUIOutput(const Json::Value &json, bo
     auto receiver = message["Receiver"].asString();
     auto contract = message["Contract"].asString();
     auto amount = message["Amount"].asString();
+    auto coinAsset = message["Coin asset"].asString();
     auto nonce = message["Nonce"].asString();
     auto maxFee = std::string();
     auto maxPriorityFee = std::string();
@@ -91,6 +92,9 @@ std::vector<std::string> EVMGenerateExpectedUIOutput(const Json::Value &json, bo
     idx++;
     auto contractAddress = FormatEthAddress("Contract", idx, contract);
     answer.insert(answer.end(), contractAddress.begin(), contractAddress.end());
+
+    idx++;
+    addTo(answer, "{} | Coin asset : {}", idx, coinAsset);
 
     idx++;
     addTo(answer, "{} | Amount : {}", idx, amount);
