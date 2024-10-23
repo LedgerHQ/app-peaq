@@ -112,7 +112,7 @@ zxerr_t eip191_msg_getItem(int8_t displayIdx, char *outKey, uint16_t outKeyLen, 
 }
 
 bool eip191_msg_parse() {
-    if (!app_mode_expert()) {
+    if (!app_mode_blindsign()) {
         return false;
     }
 

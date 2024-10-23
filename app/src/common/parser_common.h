@@ -61,6 +61,7 @@ typedef enum {
     parser_invalid_chain_id,
     parser_not_supported_parser,
     parser_not_supported_validation,
+    parser_blindsign_mode_required,
 } parser_error_t;
 
 typedef struct {

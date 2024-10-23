@@ -265,13 +265,18 @@ void handleSignEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx)
     }
 
     CHECK_APP_CANARY()
-    const char *error_msg = tx_parse_eth();
+    uint8_t error_code;
+    const char *error_msg = tx_parse_eth(&error_code);
     CHECK_APP_CANARY()
 
     if (error_msg != NULL) {
         const int error_msg_length = strnlen(error_msg, sizeof(G_io_apdu_buffer));
         MEMCPY(G_io_apdu_buffer, error_msg, error_msg_length);
         *tx += (error_msg_length);
+        if (error_code == parser_blindsign_mode_required) {
+            *flags |= IO_ASYNCH_REPLY;
+            view_blindsign_error_show();
+        }
         THROW(APDU_CODE_DATA_INVALID);
     }
 
@@ -289,6 +294,8 @@ void handleSignEip191(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t 
 
     CHECK_APP_CANARY()
     if (!eip191_msg_parse()) {
+        *flags |= IO_ASYNCH_REPLY;
+        view_blindsign_error_show();
         THROW(APDU_CODE_DATA_INVALID);
     }
     CHECK_APP_CANARY()

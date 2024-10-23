@@ -14,9 +14,9 @@
  *  limitations under the License.
  ******************************************************************************* */
 
-import Zemu, { ButtonKind, isTouchDevice } from '@zondax/zemu'
+import Zemu from '@zondax/zemu'
 import { PeaqApp } from '@zondax/ledger-peaq'
-import { ETH_PATH, EXPECTED_ETH_ADDRESS, EXPECTED_ETH_PK, defaultOptions, models } from './common'
+import { ETH_PATH, defaultOptions, models } from './common'
 import { ec } from 'elliptic'
 
 jest.setTimeout(90000)
@@ -42,8 +42,8 @@ describe.each(models)('EIP191', function (m) {
       const app = new PeaqApp(sim.getTransport())
       const msgData = data.message
 
-      // Put the app in expert mode
-      await sim.toggleExpertMode()
+      // Put the app in blindsign mode
+      await sim.toggleBlindSigning()
 
       // eth pubkey used for ETH_PATH: "m/44'/60'/0'/0'/5"
       // to verify signature
@@ -53,7 +53,7 @@ describe.each(models)('EIP191', function (m) {
       const signatureRequest = app.signPersonalMessage(ETH_PATH, msgData.toString('hex'))
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-eth-${data.name}`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-eth-${data.name}`, true, 0, 15000, true)
 
       let resp = await signatureRequest
       console.log(resp)
