@@ -34,7 +34,17 @@ type TestData = {
   nft_info: NftInfo | undefined
 }
 
-const SIGN_TEST_DATA = [
+const SIGN_TEST_DATA_CLEARSIGN = [
+  {
+    name: 'erc20_transfer',
+    op: Buffer.from(
+      'f86e80856d6e2edc00832dc6c0941d80c49bbbcd1c0911346656b529df9e5c2f783d8203e8b844a9059cbb000000000000000000000000b7784e5ad303d44067d2a6353441b784c226ccaf00000000000000000000000000000000000000000000000000000000075bca00820d0a8080',
+      'hex',
+    ),
+  },
+]
+
+const SIGN_TEST_DATA_BLINDISIGN = [
   {
     name: 'transfer',
     op: Buffer.from(
@@ -111,13 +121,6 @@ const SIGN_TEST_DATA = [
     ),
   },
   {
-    name: 'erc20_transfer',
-    op: Buffer.from(
-      'f86e80856d6e2edc00832dc6c0941d80c49bbbcd1c0911346656b529df9e5c2f783d8203e8b844a9059cbb000000000000000000000000b7784e5ad303d44067d2a6353441b784c226ccaf00000000000000000000000000000000000000000000000000000000075bca00820d0a8080',
-      'hex',
-    ),
-  },
-  {
     name: 'undelegate_contract',
     op: Buffer.from('ef80856d6e2edc00832dc6c094c67dce33d7a8efa5ffeb961899c73fe01bce92738203e886b302f3930001820d0a8080', 'hex'),
   },
@@ -171,15 +174,12 @@ describe.each(models)('ETHT', function (m) {
     }
   })
 
-  test.concurrent.each(SIGN_TEST_DATA)('sign transaction:  $name', async function (data) {
+  test.concurrent.each(SIGN_TEST_DATA_CLEARSIGN)('clear sign transaction:  $name', async function (data) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })
       const app = new PeaqApp(sim.getTransport())
       const msg = data.op
-
-      // Put the app in expert mode
-      await sim.toggleExpertMode()
 
       // eth pubkey used for ETH_PATH: "m/44'/60'/0'/0'/5"
       // to verify signature
@@ -190,7 +190,48 @@ describe.each(models)('ETHT', function (m) {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-eth-${data.name}`)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-eth-${data.name}`, true, 0, 15000, false)
+
+      let resp = await signatureRequest
+      console.log(resp)
+
+      const EC = new ec('secp256k1')
+      const msgHash = sha3.keccak256(msg)
+
+      const pubKey = Buffer.from(EXPECTED_PUBLIC_KEY, 'hex')
+      const signature_obj = {
+        r: Buffer.from(resp.r, 'hex'),
+        s: Buffer.from(resp.s, 'hex'),
+      }
+
+      // Verify signature
+      const signatureOK = EC.verify(msgHash, signature_obj, pubKey, 'hex')
+      expect(signatureOK).toEqual(true)
+    } finally {
+      await sim.close()
+    }
+  })
+
+  test.only.each(SIGN_TEST_DATA_BLINDISIGN)('blind sign transaction:  $name', async function (data) {
+    const sim = new Zemu(m.path)
+    try {
+      await sim.start({ ...defaultOptions, model: m.name })
+      const app = new PeaqApp(sim.getTransport())
+      const msg = data.op
+
+      // Put the app in expert mode
+      await sim.toggleBlindSigning()
+
+      // eth pubkey used for ETH_PATH: "m/44'/60'/0'/0'/5"
+      // to verify signature
+      const EXPECTED_PUBLIC_KEY = '024f1dd50f180bfd546339e75410b127331469837fa618d950f7cfb8be351b0020'
+
+      // do not wait here..
+      const signatureRequest = app.signEVMTransaction(ETH_PATH, msg, null)
+      // Wait until we are not in the main menu
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-eth-${data.name}`, true, 0, 15000, true)
 
       let resp = await signatureRequest
       console.log(resp)
