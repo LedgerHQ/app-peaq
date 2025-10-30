@@ -60,9 +60,13 @@ parser_error_t readu256BE(parser_context_t *ctx, uint256_t *bigInt) {
     return parser_ok;
 }
 
-bool zero128(uint128_t *number) { return ((LOWER_P(number) == 0) && (UPPER_P(number) == 0)); }
+bool zero128(uint128_t *number) {
+    return ((LOWER_P(number) == 0) && (UPPER_P(number) == 0));
+}
 
-bool zero256(uint256_t *number) { return (zero128(&LOWER_P(number)) && zero128(&UPPER_P(number))); }
+bool zero256(uint256_t *number) {
+    return (zero128(&LOWER_P(number)) && zero128(&UPPER_P(number)));
+}
 
 void copy128(uint128_t *target, uint128_t *number) {
     UPPER_P(target) = UPPER_P(number);
@@ -234,9 +238,13 @@ bool gt256(uint256_t *number1, uint256_t *number2) {
     return gt128(&UPPER_P(number1), &UPPER_P(number2));
 }
 
-bool gte128(uint128_t *number1, uint128_t *number2) { return gt128(number1, number2) || equal128(number1, number2); }
+bool gte128(uint128_t *number1, uint128_t *number2) {
+    return gt128(number1, number2) || equal128(number1, number2);
+}
 
-bool gte256(uint256_t *number1, uint256_t *number2) { return gt256(number1, number2) || equal256(number1, number2); }
+bool gte256(uint256_t *number1, uint256_t *number2) {
+    return gt256(number1, number2) || equal256(number1, number2);
+}
 
 void add128(uint128_t *number1, uint128_t *number2, uint128_t *target) {
     UPPER_P(target) = UPPER_P(number1) + UPPER_P(number2) + ((LOWER_P(number1) + LOWER_P(number2)) < LOWER_P(number1));
@@ -290,7 +298,8 @@ void mul128(uint128_t *number1, uint128_t *number2, uint128_t *target) {
     uint64_t bottom[4] = {UPPER_P(number2) >> 32, UPPER_P(number2) & 0xffffffff, LOWER_P(number2) >> 32,
                           LOWER_P(number2) & 0xffffffff};
     uint64_t products[4][4];
-    uint128_t tmp, tmp2;
+    uint128_t tmp;
+    uint128_t tmp2;
 
     for (int y = 3; y > -1; y--) {
         for (int x = 3; x > -1; x--) {
@@ -329,8 +338,14 @@ void mul256(uint256_t *number1, uint256_t *number2, uint256_t *target) {
     uint128_t top[4];
     uint128_t bottom[4];
     uint128_t products[4][4];
-    uint128_t tmp, tmp2, fourth64, third64, second64, first64;
-    uint256_t target1, target2;
+    uint128_t tmp;
+    uint128_t tmp2;
+    uint128_t fourth64;
+    uint128_t third64;
+    uint128_t second64;
+    uint128_t first64;
+    uint256_t target1;
+    uint256_t target2;
     UPPER(top[0]) = 0;
     LOWER(top[0]) = UPPER(UPPER_P(number1));
     UPPER(top[1]) = 0;
@@ -420,7 +435,10 @@ void mul256(uint256_t *number1, uint256_t *number2, uint256_t *target) {
 }
 
 void divmod128(uint128_t *l, uint128_t *r, uint128_t *retDiv, uint128_t *retMod) {
-    uint128_t copyd, adder, resDiv, resMod;
+    uint128_t copyd;
+    uint128_t adder;
+    uint128_t resDiv;
+    uint128_t resMod;
     uint128_t one;
     UPPER(one) = 0;
     LOWER(one) = 1;
@@ -451,7 +469,10 @@ void divmod128(uint128_t *l, uint128_t *r, uint128_t *retDiv, uint128_t *retMod)
 }
 
 void divmod256(uint256_t *l, uint256_t *r, uint256_t *retDiv, uint256_t *retMod) {
-    uint256_t copyd, adder, resDiv, resMod;
+    uint256_t copyd;
+    uint256_t adder;
+    uint256_t resDiv;
+    uint256_t resMod;
     uint256_t one;
     clear256(&one);
     UPPER(LOWER(one)) = 0;
@@ -483,9 +504,10 @@ void divmod256(uint256_t *l, uint256_t *r, uint256_t *retDiv, uint256_t *retMod)
 }
 
 static void reverseString(char *str, uint32_t length) {
-    uint32_t i, j;
+    uint32_t i = 0;
+    uint32_t j = 0;
     for (i = 0, j = length - 1; i < j; i++, j--) {
-        uint8_t c;
+        uint8_t c = 0;
         c = str[i];
         str[i] = str[j];
         str[j] = c;

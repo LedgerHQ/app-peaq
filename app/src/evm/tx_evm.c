@@ -26,7 +26,7 @@
 
 static parser_context_t ctx_parsed_tx;
 
-const char *tx_parse_eth(uint8_t* error_code) {
+const char *tx_parse_eth(uint8_t *error_code) {
     uint8_t err = parser_parse_eth(&ctx_parsed_tx, tx_get_buffer(), tx_get_buffer_length());
 
     CHECK_APP_CANARY()
@@ -48,7 +48,9 @@ const char *tx_parse_eth(uint8_t* error_code) {
 zxerr_t tx_compute_eth_v(unsigned int info, uint8_t *v) {
     parser_error_t err = parser_compute_eth_v(&ctx_parsed_tx, info, v);
 
-    if (err != parser_ok) return zxerr_unknown;
+    if (err != parser_ok) {
+        return zxerr_unknown;
+    }
 
     return zxerr_ok;
 }
@@ -77,10 +79,13 @@ zxerr_t tx_getItemEth(int8_t displayIdx, char *outKey, uint16_t outKeyLen, char 
         parser_getItemEth(&ctx_parsed_tx, displayIdx, outKey, outKeyLen, outVal, outValLen, pageIdx, pageCount);
 
     // Convert error codes
-    if (err == parser_no_data || err == parser_display_idx_out_of_range || err == parser_display_page_out_of_range)
+    if (err == parser_no_data || err == parser_display_idx_out_of_range || err == parser_display_page_out_of_range) {
         return zxerr_no_data;
+    }
 
-    if (err != parser_ok) return zxerr_unknown;
+    if (err != parser_ok) {
+        return zxerr_unknown;
+    }
 
     return zxerr_ok;
 }

@@ -36,7 +36,9 @@
 
 uint64_t saturating_add(uint64_t a, uint64_t b) {
     uint64_t num = a + b;
-    if (num < a || num < b) return UINT64_MAX;
+    if (num < a || num < b) {
+        return UINT64_MAX;
+    }
 
     return num;
 }
@@ -44,7 +46,9 @@ uint64_t saturating_add(uint64_t a, uint64_t b) {
 uint32_t saturating_add_u32(uint32_t a, uint32_t b) {
     uint32_t num = a + b;
 
-    if (num < a || num < b) return UINT32_MAX;
+    if (num < a || num < b) {
+        return UINT32_MAX;
+    }
 
     return num;
 }
@@ -72,9 +76,13 @@ parser_error_t be_bytes_to_u64(const uint8_t *bytes, uint8_t len, uint64_t *num)
 }
 
 rlp_error_t get_tx_rlp_len(const uint8_t *buffer, uint32_t len, uint64_t *read, uint64_t *to_read) {
-    if (buffer == NULL || len == 0) return rlp_no_data;
+    if (buffer == NULL || len == 0) {
+        return rlp_no_data;
+    }
 
-    if (read == NULL || to_read == NULL) return rlp_no_data;
+    if (read == NULL || to_read == NULL) {
+        return rlp_no_data;
+    }
 
     // get alias
     const uint8_t *data = buffer;
@@ -111,8 +119,10 @@ rlp_error_t get_tx_rlp_len(const uint8_t *buffer, uint32_t len, uint64_t *read, 
         // And then the length is just the number BE encoded
         uint64_t num_bytes = (marker - RLP_MARKER_VAL_2);
 
-        uint64_t num;
-        if (be_bytes_to_u64(&data[offset], num_bytes, &num) != 0) return rlp_invalid_data;
+        uint64_t num = 0;
+        if (be_bytes_to_u64(&data[offset], num_bytes, &num) != 0) {
+            return rlp_invalid_data;
+        }
 
         // marker byte + number of bytes used to encode the len
         *read += 1 + num_bytes;

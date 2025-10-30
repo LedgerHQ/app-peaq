@@ -59,30 +59,30 @@ std::string FormatAmount(const std::string &amount) {
     return std::string(buffer);
 }
 
-std::vector<std::string> EVMGenerateExpectedUIOutput(const Json::Value &json, bool) {
+std::vector<std::string> EVMGenerateExpectedUIOutput(const nlohmann::json &json, bool) {
     auto answer = std::vector<std::string>();
 
     ///
-    auto description = json["description"].asString();
+    auto description = json["description"].get<std::string>();
     auto message = json["message"];
-    auto receiver = message["Receiver"].asString();
-    auto contract = message["Contract"].asString();
-    auto amount = message["Amount"].asString();
-    auto coinAsset = message["Coin asset"].asString();
-    auto nonce = message["Nonce"].asString();
+    auto receiver = message["Receiver"].get<std::string>();
+    auto contract = message["Contract"].get<std::string>();
+    auto amount = message["Amount"].get<std::string>();
+    auto coinAsset = message["Coin asset"].get<std::string>();
+    auto nonce = message["Nonce"].get<std::string>();
     auto maxFee = std::string();
     auto maxPriorityFee = std::string();
     auto gasPrice = std::string();
     if (description.find("eip1559") != std::string::npos) {
-        maxFee = message["MaxFeePerGas"].asString();
-        maxPriorityFee = message["MaxPriorityFeePerGas"].asString();
+        maxFee = message["MaxFeePerGas"].get<std::string>();
+        maxPriorityFee = message["MaxPriorityFeePerGas"].get<std::string>();
     } else {
-        gasPrice = message["GasPrice"].asString();
+        gasPrice = message["GasPrice"].get<std::string>();
     }
-    auto gasLimit = message["GasLimit"].asString();
-    auto value = message["Value"].asString();
-    auto txhash = message["Eth-Hash"].asString();
-    auto data = message["Data"].asString();
+    auto gasLimit = message["GasLimit"].get<std::string>();
+    auto value = message["Value"].get<std::string>();
+    auto txhash = message["Eth-Hash"].get<std::string>();
+    auto data = message["Data"].get<std::string>();
     ///
 
     uint8_t idx = 0;

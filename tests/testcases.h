@@ -14,9 +14,8 @@
  *  limitations under the License.
  ********************************************************************************/
 #pragma once
-#include <json/json.h>
-
 #include <fstream>
+#include <nlohmann/json.hpp>
 
 typedef struct {
     uint64_t index;

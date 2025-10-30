@@ -30,7 +30,9 @@ zxerr_t keccak_digest(const unsigned char *in, unsigned int inLen, unsigned char
 #if defined(LEDGER_SPECIFIC)
     // return actual size using value from signatureLength
     cx_sha3_t keccak;
-    if (cx_keccak_init_no_throw(&keccak, outLen * 8) != CX_OK) return zxerr_unknown;
+    if (cx_keccak_init_no_throw(&keccak, outLen * 8) != CX_OK) {
+        return zxerr_unknown;
+    }
     CHECK_CX_OK(cx_hash_no_throw((cx_hash_t *)&keccak, CX_LAST, in, inLen, out, outLen));
 #endif
     return zxerr_ok;

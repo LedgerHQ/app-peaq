@@ -11,9 +11,9 @@ _Please visit our website at [zondax.ch](https://www.zondax.ch)_
 
 ---
 
-This project contains the peaq app for Ledger Nano S Nano S+ and X.
+This project contains the peaq app for Ledger Nano S+, Nano X, Flex, Stax and Apex P.
 
-- Ledger Nano S/S+/X peaq app
+- Ledger Nano S+/X, Flex, Stax, and Apex P peaq app
 - Specs / Documentation
 - C++ unit tests
 - Zemu tests
@@ -36,13 +36,13 @@ Download a release from here (https://github.com/Zondax/ledger-peaq/releases). Y
 
 If the file is not executable, run
 ```sh
-chmod +x ./installer.sh
+chmod +x ./installer_s2.sh
 ```
 
 then run:
 
 ```sh
-./installer.sh load
+./installer_s2.sh load
 ```
 
 # Development

@@ -71,7 +71,7 @@ parser_error_t rlp_read(parser_context_t *ctx, rlp_t *rlp) {
         CHECK_ERROR(readBytes(ctx, &rlpLenPtr, bytesLen))
         rlp->rlpLen = 0;
         for (uint8_t i = 0; i < bytesLen; i++) {
-            rlp->rlpLen <<= 8u;
+            rlp->rlpLen <<= 8U;
             rlp->rlpLen += *(rlpLenPtr + i);
         }
         CHECK_ERROR(readBytes(ctx, &rlp->ptr, rlp->rlpLen))
@@ -88,7 +88,7 @@ parser_error_t rlp_read(parser_context_t *ctx, rlp_t *rlp) {
         CHECK_ERROR(readBytes(ctx, &rlpLenPtr, bytesLen))
         rlp->rlpLen = 0;
         for (uint8_t i = 0; i < bytesLen; i++) {
-            rlp->rlpLen <<= 8u;
+            rlp->rlpLen <<= 8U;
             rlp->rlpLen += *(rlpLenPtr + i);
         }
         CHECK_ERROR(readBytes(ctx, &rlp->ptr, rlp->rlpLen))
@@ -114,7 +114,9 @@ parser_error_t rlp_readUInt256(const rlp_t *rlp, uint256_t *value) {
     uint8_t tmpBuffer[32] = {0};
     switch (rlp->kind) {
         case RLP_KIND_STRING:
-            if (rlp->rlpLen > sizeof(tmpBuffer)) return parser_value_out_of_range;
+            if (rlp->rlpLen > sizeof(tmpBuffer)) {
+                return parser_value_out_of_range;
+            }
             MEMCPY(tmpBuffer + (sizeof(tmpBuffer) - rlp->rlpLen), rlp->ptr, rlp->rlpLen);
             break;
 

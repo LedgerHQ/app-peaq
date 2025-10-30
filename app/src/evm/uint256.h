@@ -40,8 +40,8 @@ typedef struct uint256_t {
 
 #define UPPER_P(x) x->elements[0]
 #define LOWER_P(x) x->elements[1]
-#define UPPER(x) x.elements[0]
-#define LOWER(x) x.elements[1]
+#define UPPER(x)   x.elements[0]
+#define LOWER(x)   x.elements[1]
 
 parser_error_t readu256BE(parser_context_t *ctx, uint256_t *bigInt);
 parser_error_t readu128BE(parser_context_t *ctx, uint128_t *value);

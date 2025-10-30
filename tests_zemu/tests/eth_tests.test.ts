@@ -212,7 +212,7 @@ describe.each(models)('ETHT', function (m) {
     }
   })
 
-  test.only.each(SIGN_TEST_DATA_BLINDISIGN)('blind sign transaction:  $name', async function (data) {
+  test.concurrent.each(SIGN_TEST_DATA_BLINDISIGN)('blind sign transaction:  $name', async function (data) {
     const sim = new Zemu(m.path)
     try {
       await sim.start({ ...defaultOptions, model: m.name })

@@ -36,7 +36,9 @@ void extract_eth_path(uint32_t rx, uint32_t offset) {
 
     const uint8_t path_len = *(G_io_apdu_buffer + offset);
 
-    if (path_len > HDPATH_LEN_DEFAULT || path_len < 3) THROW(APDU_CODE_WRONG_LENGTH);
+    if (path_len > HDPATH_LEN_DEFAULT || path_len < 3) {
+        THROW(APDU_CODE_WRONG_LENGTH);
+    }
 
     if ((rx - offset - 1) < sizeof(uint32_t) * path_len) {
         THROW(APDU_CODE_WRONG_LENGTH);
@@ -76,7 +78,7 @@ bool process_chunk_eip191(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
 
     uint8_t *data = &(G_io_apdu_buffer[OFFSET_DATA]);
     uint32_t len = rx - OFFSET_DATA;
-    uint64_t added;
+    uint64_t added = 0;
     switch (payloadType) {
         case P1_ETH_FIRST:
             tx_initialize();
@@ -132,6 +134,7 @@ bool process_chunk_eip191(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
             return false;
     }
     THROW(APDU_CODE_INVALIDP1P2);
+    return false;
 }
 
 bool process_chunk_eth(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
@@ -152,7 +155,7 @@ bool process_chunk_eth(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
     uint8_t *data = &(G_io_apdu_buffer[OFFSET_DATA]);
     uint32_t len = rx - OFFSET_DATA;
 
-    uint64_t added;
+    uint64_t added = 0;
     switch (payloadType) {
         case P1_ETH_FIRST:
             tx_initialize();
@@ -230,6 +233,7 @@ bool process_chunk_eth(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
             return false;
     }
     THROW(APDU_CODE_INVALIDP1P2);
+    return false;
 }
 
 void handleGetAddrEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx) {
@@ -239,7 +243,9 @@ void handleGetAddrEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t 
     uint8_t requireConfirmation = G_io_apdu_buffer[OFFSET_P1];
     uint8_t with_code = G_io_apdu_buffer[OFFSET_P2];
 
-    if (with_code != P2_CHAINCODE && with_code != P2_NO_CHAINCODE) THROW(APDU_CODE_INVALIDP1P2);
+    if (with_code != P2_CHAINCODE && with_code != P2_NO_CHAINCODE) {
+        THROW(APDU_CODE_INVALIDP1P2);
+    }
 
     peaq_chain_code = with_code;
 
@@ -265,7 +271,7 @@ void handleSignEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx)
     }
 
     CHECK_APP_CANARY()
-    uint8_t error_code;
+    uint8_t error_code = 0;
     const char *error_msg = tx_parse_eth(&error_code);
     CHECK_APP_CANARY()
 

@@ -28,20 +28,20 @@ extern "C" {
 #define P1_ETH_FIRST 0x00
 #define P1_ETH_MORE  0x80
 // eth address chain_code allowed valuec
-#define P2_NO_CHAINCODE         0x00
-#define P2_CHAINCODE            0x01
+#define P2_NO_CHAINCODE           0x00
+#define P2_CHAINCODE              0x01
 
-#define ETH_ADDR_LEN            20u
-#define SELECTOR_LENGTH         4
-#define BIGINT_LENGTH           32
-#define DATA_BYTES_TO_PRINT     10
+#define ETH_ADDR_LEN              20u
+#define SELECTOR_LENGTH           4
+#define BIGINT_LENGTH             32
+#define DATA_BYTES_TO_PRINT       10
 
-#define INS_SIGN_ETH            0x04
-#define INS_GET_ADDR_ETH        0x02
+#define INS_SIGN_ETH              0x04
+#define INS_GET_ADDR_ETH          0x02
 #define INS_SIGN_PERSONAL_MESSAGE 0x08
 
-#define COIN_DECIMALS           18
-#define VIEW_ADDRESS_OFFSET_ETH (SECP256K1_PK_LEN + 1 + 1)
+#define COIN_DECIMALS             18
+#define VIEW_ADDRESS_OFFSET_ETH   (SECP256K1_PK_LEN + 1 + 1)
 
 #ifdef __cplusplus
 }
