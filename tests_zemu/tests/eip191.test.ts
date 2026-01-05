@@ -60,7 +60,7 @@ describe.each(models)('EIP191', function (m) {
 
       const header = Buffer.from('\x19Ethereum Signed Message:\n', 'utf8')
       const msgLengthString = String(msgData.length)
-      const msg = Buffer.concat([header, Buffer.from(msgLengthString, 'utf8'), msgData])
+      const msg = Buffer.concat([header, Buffer.from(msgLengthString, 'utf8'), msgData] as unknown as Uint8Array[])
       const msgHash = sha3.keccak256(msg)
 
       const signature_obj = {
