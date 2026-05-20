@@ -34,8 +34,6 @@ extern "C" {
         }                         \
     } while (0)
 
-extern uint8_t peaq_chain_code;
-
 zxerr_t keccak_digest(const unsigned char *in, unsigned int inLen, unsigned char *out, unsigned int outLen);
 
 #ifdef __cplusplus

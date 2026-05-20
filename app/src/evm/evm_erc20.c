@@ -18,7 +18,9 @@
 
 #include "zxformat.h"
 
-#define EVM_SELECTOR_LENGTH 4
+#define EVM_SELECTOR_LENGTH          4
+#define ERC20_ADDRESS_PADDING_LENGTH 12
+
 // Prefix is calculated as: keccak256("transfer(address,uint256)") = 0xa9059cbb
 const uint8_t ERC20_TRANSFER_PREFIX[] = {0xa9, 0x05, 0x9c, 0xbb};
 
@@ -34,6 +36,14 @@ parser_error_t getERC20Token(const eth_tx_t *ethObj, char tokenSymbol[MAX_SYMBOL
     if (ethObj == NULL || tokenSymbol == NULL || decimals == NULL || ethObj->tx.data.rlpLen != ERC20_DATA_LENGTH ||
         memcmp(ethObj->tx.data.ptr, ERC20_TRANSFER_PREFIX, EVM_SELECTOR_LENGTH) != 0) {
         return parser_unexpected_value;
+    }
+
+    // Verify address contract: first 12 bytes must be 0
+    const uint8_t *addressPtr = ethObj->tx.data.ptr + EVM_SELECTOR_LENGTH;
+    for (uint8_t i = 0; i < ERC20_ADDRESS_PADDING_LENGTH; i++) {
+        if (*(addressPtr++) != 0) {
+            return parser_unexpected_value;
+        }
     }
 
     // Check if token is in the list
@@ -98,6 +108,15 @@ bool validateERC20(eth_tx_t *ethObj) {
         memcmp(ethObj->tx.data.ptr, ERC20_TRANSFER_PREFIX, sizeof(ERC20_TRANSFER_PREFIX)) != 0) {
         ethObj->is_erc20_transfer = false;
         return false;
+    }
+    // ABI-encode pads the 20-byte address with 12 leading zero bytes; enforce the
+    // padding so the displayed recipient matches the signed calldata bit-for-bit.
+    const uint8_t *addressPtr = ethObj->tx.data.ptr + EVM_SELECTOR_LENGTH;
+    for (uint8_t i = 0; i < ERC20_ADDRESS_PADDING_LENGTH; i++) {
+        if (*(addressPtr++) != 0) {
+            ethObj->is_erc20_transfer = false;
+            return false;
+        }
     }
     ethObj->is_erc20_transfer = true;
     return true;

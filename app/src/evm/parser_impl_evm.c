@@ -98,6 +98,10 @@ static parser_error_t parse_legacy_tx(parser_context_t *ctx, eth_tx_t *tx_obj) {
     // R and S values should be either 0 or 0x80
     if ((sig_r.rlpLen == 0 && sig_s.rlpLen == 0) ||
         ((sig_r.rlpLen == 1 && sig_s.rlpLen == 1) && !(*sig_r.ptr | *sig_s.ptr))) {
+        // Reject any trailing bytes inside the signed RLP list.
+        if (ctx->offset < ctx->bufferLen) {
+            return parser_unexpected_characters;
+        }
         return parser_ok;
     }
     return parser_invalid_rs_values;
@@ -230,6 +234,7 @@ static parser_error_t printEthHash(const parser_context_t *ctx, char *outKey, ui
 
     pageString(outVal, outValLen, hex, pageIdx, pageCount);
 
+    MEMZERO(hash, sizeof(hash));
     return parser_ok;
 }
 

@@ -24,8 +24,6 @@
 #define CX_RIPEMD160_SIZE 20
 #endif
 
-uint8_t peaq_chain_code;
-
 zxerr_t keccak_digest(const unsigned char *in, unsigned int inLen, unsigned char *out, unsigned int outLen) {
 #if defined(LEDGER_SPECIFIC)
     // return actual size using value from signatureLength

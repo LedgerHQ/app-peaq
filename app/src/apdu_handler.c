@@ -33,23 +33,7 @@
 #include "view_internal.h"
 #include "zxmacros.h"
 
-static bool tx_initialized = false;
-
-void extractHDPath(uint32_t rx, uint32_t offset) {
-    tx_initialized = false;
-
-    if ((rx - offset) < sizeof(uint32_t) * HDPATH_LEN_DEFAULT) {
-        THROW(APDU_CODE_WRONG_LENGTH);
-    }
-
-    memcpy(hdPath, G_io_apdu_buffer + offset, sizeof(uint32_t) * HDPATH_LEN_DEFAULT);
-
-    const bool mainnet = hdPath[0] == HDPATH_0_DEFAULT && hdPath[1] == HDPATH_1_DEFAULT;
-
-    if (!mainnet) {
-        THROW(APDU_CODE_DATA_INVALID);
-    }
-}
+bool review_pending = false;
 
 __Z_INLINE void handle_getversion(__Z_UNUSED volatile uint32_t *flags, volatile uint32_t *tx) {
     G_io_apdu_buffer[0] = 0;
@@ -93,6 +77,10 @@ void handleApdu(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx) {
                 THROW(APDU_CODE_WRONG_LENGTH);
             }
 
+            if (is_review_pending()) {
+                THROW(APDU_CODE_COMMAND_NOT_ALLOWED);
+            }
+
             const uint8_t instruction = G_io_apdu_buffer[OFFSET_INS];
             switch (instruction) {
                 case INS_GET_VERSION: {
@@ -129,15 +117,22 @@ void handleApdu(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx) {
             }
         }
         CATCH(EXCEPTION_IO_RESET) {
+            set_review_pending(false);
             THROW(EXCEPTION_IO_RESET);
         }
         CATCH_OTHER(e) {
             switch (e & 0xF000) {
-                case 0x6000:
                 case APDU_CODE_OK:
+                    // Multi-chunk continuation (handleSign* THROWs APDU_CODE_OK between chunks).
+                    // Leave state alone so the next chunk can resume.
+                    sw = e;
+                    break;
+                case 0x6000:
+                    reset_evm_chunk_state();
                     sw = e;
                     break;
                 default:
+                    reset_evm_chunk_state();
                     sw = 0x6800 | (e & 0x7FF);
                     break;
             }
