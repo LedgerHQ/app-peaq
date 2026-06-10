@@ -30,6 +30,12 @@
 #include "zxmacros.h"
 
 static bool tx_initialized = false;
+static uint32_t bytes_to_read = 0;
+
+void reset_evm_chunk_state(void) {
+    tx_initialized = false;
+    bytes_to_read = 0;
+}
 
 void extract_eth_path(uint32_t rx, uint32_t offset) {
     tx_initialized = false;
@@ -40,7 +46,9 @@ void extract_eth_path(uint32_t rx, uint32_t offset) {
         THROW(APDU_CODE_WRONG_LENGTH);
     }
 
-    if ((rx - offset - 1) < sizeof(uint32_t) * path_len) {
+    // Express the guard additively so a truncated APDU (rx <= offset) cannot
+    // wrap the left-hand side to UINT32_MAX and pass the check.
+    if (rx < offset + 1 + sizeof(uint32_t) * path_len) {
         THROW(APDU_CODE_WRONG_LENGTH);
     }
 
@@ -62,8 +70,6 @@ void extract_eth_path(uint32_t rx, uint32_t offset) {
     // set the hdPath len
     hdPathEth_len = path_len;
 }
-
-uint32_t bytes_to_read;
 
 bool process_chunk_eip191(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
     const uint8_t payloadType = G_io_apdu_buffer[OFFSET_PAYLOAD_TYPE];
@@ -92,7 +98,8 @@ bool process_chunk_eip191(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
 
             // plus the first offset data containing the path len
             data += path_len + 1;
-            if (len < path_len + 1) {
+            // Require the path bytes AND the 4-byte length prefix that U4BE reads next.
+            if (len < path_len + 1 + sizeof(uint32_t)) {
                 THROW(APDU_CODE_WRONG_LENGTH);
             }
             len -= path_len + 1;
@@ -108,7 +115,6 @@ bool process_chunk_eip191(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
             tx_initialized = true;
 
             if (bytes_to_read == 0) {
-                tx_initialized = false;
                 return true;
             }
 
@@ -127,7 +133,6 @@ bool process_chunk_eip191(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
 
             // check if this chunk was the last one
             if (bytes_to_read == 0) {
-                tx_initialized = false;
                 return true;
             }
 
@@ -169,7 +174,9 @@ bool process_chunk_eth(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
 
             // plus the first offset data containing the path len
             data += path_len + 1;
-            if (len < path_len) {
+            // The guard must match the subtraction below; len < path_len previously
+            // allowed len == path_len through, and the subtraction wrapped to ~UINT32_MAX.
+            if (len < path_len + 1) {
                 THROW(APDU_CODE_WRONG_LENGTH);
             }
 
@@ -220,13 +227,11 @@ bool process_chunk_eth(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
             added = tx_append(data, max_len);
 
             if (added != max_len) {
-                tx_initialized = false;
                 THROW(APDU_CODE_OUTPUT_BUFFER_TOO_SMALL);
             }
 
             // check if this chunk was the last one
             if (missing - len == 0) {
-                tx_initialized = false;
                 return true;
             }
 
@@ -256,6 +261,7 @@ void handleGetAddrEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t 
     }
     if (requireConfirmation) {
         view_review_init(eth_addr_getItem, eth_addr_getNumItems, app_reply_address);
+        set_review_pending(true);
         view_review_show(REVIEW_ADDRESS);
         *flags |= IO_ASYNCH_REPLY;
         return;
@@ -269,6 +275,8 @@ void handleSignEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx)
     if (!process_chunk_eth(tx, rx)) {
         THROW(APDU_CODE_OK);
     }
+    // Full tx assembled; close the chunking session before parse/review.
+    reset_evm_chunk_state();
 
     CHECK_APP_CANARY()
     uint8_t error_code = 0;
@@ -288,6 +296,7 @@ void handleSignEth(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t rx)
 
     CHECK_APP_CANARY()
     view_review_init(tx_getItemEth, tx_getNumItemsEth, app_sign_eth);
+    set_review_pending(true);
     view_review_show(REVIEW_TXN);
     *flags |= IO_ASYNCH_REPLY;
 }
@@ -297,6 +306,8 @@ void handleSignEip191(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t 
     if (!process_chunk_eip191(tx, rx)) {
         THROW(APDU_CODE_OK);
     }
+    // Full message assembled; close the chunking session before parse/review.
+    reset_evm_chunk_state();
 
     CHECK_APP_CANARY()
     if (!eip191_msg_parse()) {
@@ -307,6 +318,7 @@ void handleSignEip191(volatile uint32_t *flags, volatile uint32_t *tx, uint32_t 
     CHECK_APP_CANARY()
 
     view_review_init(eip191_msg_getItem, eip191_msg_getNumItems, app_sign_eip191);
+    set_review_pending(true);
     view_review_show(REVIEW_TXN);
     *flags |= IO_ASYNCH_REPLY;
 }

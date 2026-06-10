@@ -29,6 +29,10 @@ extern "C" {
 extern uint32_t hdPathEth[HDPATH_LEN_DEFAULT];
 extern uint32_t hdPathEth_len;
 
+// P2 byte from GET_ADDR_ETH: when equal to P2_CHAINCODE, the response appends
+// the 32-byte BIP32 chain code to the address/pubkey payload.
+extern uint8_t peaq_chain_code;
+
 zxerr_t crypto_fillEthAddress(uint8_t *buffer, uint16_t buffer_len, uint16_t *addrLen);
 zxerr_t crypto_sign_eth(uint8_t *buffer, uint16_t signatureMaxlen, const uint8_t *message, uint16_t messageLen,
                         uint16_t *sigSize, bool hash);

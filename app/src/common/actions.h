@@ -16,6 +16,7 @@
 #pragma once
 
 #include <os_io_seproxyhal.h>
+#include <stdbool.h>
 #include <stdint.h>
 
 #include "apdu_codes.h"
@@ -27,6 +28,16 @@
 #include "zxerror.h"
 
 extern uint16_t action_addrResponseLen;
+
+extern bool review_pending;
+
+__Z_INLINE void set_review_pending(bool val) {
+    review_pending = val;
+}
+
+__Z_INLINE bool is_review_pending(void) {
+    return review_pending;
+}
 
 __Z_INLINE zxerr_t app_fill_eth_address() {
     // Put data directly in the apdu buffer
@@ -54,6 +65,8 @@ __Z_INLINE void app_sign_eip191() {
         err = crypto_sign_eth(G_io_apdu_buffer, IO_APDU_BUFFER_SIZE - 3, hash, 32, &replyLen, false);
     }
 
+    set_review_pending(false);
+
     if (err != zxerr_ok || replyLen == 0) {
         set_code(G_io_apdu_buffer, 0, APDU_CODE_SIGN_VERIFY_ERROR);
         io_exchange(CHANNEL_APDU | IO_RETURN_AFTER_TX, 2);
@@ -71,6 +84,8 @@ __Z_INLINE void app_sign_eth() {
     MEMZERO(G_io_apdu_buffer, IO_APDU_BUFFER_SIZE);
     zxerr_t err = crypto_sign_eth(G_io_apdu_buffer, IO_APDU_BUFFER_SIZE - 3, message, messageLength, &replyLen, true);
 
+    set_review_pending(false);
+
     if (err != zxerr_ok || replyLen == 0) {
         set_code(G_io_apdu_buffer, 0, APDU_CODE_SIGN_VERIFY_ERROR);
         io_exchange(CHANNEL_APDU | IO_RETURN_AFTER_TX, 2);
@@ -81,17 +96,20 @@ __Z_INLINE void app_sign_eth() {
 }
 
 __Z_INLINE void app_reject() {
+    set_review_pending(false);
     MEMZERO(G_io_apdu_buffer, IO_APDU_BUFFER_SIZE);
     set_code(G_io_apdu_buffer, 0, APDU_CODE_COMMAND_NOT_ALLOWED);
     io_exchange(CHANNEL_APDU | IO_RETURN_AFTER_TX, 2);
 }
 
 __Z_INLINE void app_reply_address() {
+    set_review_pending(false);
     set_code(G_io_apdu_buffer, action_addrResponseLen, APDU_CODE_OK);
     io_exchange(CHANNEL_APDU | IO_RETURN_AFTER_TX, action_addrResponseLen + 2);
 }
 
 __Z_INLINE void app_reply_error() {
+    set_review_pending(false);
     set_code(G_io_apdu_buffer, 0, APDU_CODE_DATA_INVALID);
     io_exchange(CHANNEL_APDU | IO_RETURN_AFTER_TX, 2);
 }

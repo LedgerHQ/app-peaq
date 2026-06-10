@@ -26,6 +26,8 @@
 uint32_t hdPathEth[HDPATH_LEN_DEFAULT];
 uint32_t hdPathEth_len;
 
+uint8_t peaq_chain_code;
+
 typedef struct {
     uint8_t r[32];
     uint8_t s[32];
@@ -73,6 +75,9 @@ catch_cx_error:
 
     if (error != zxerr_ok) {
         MEMZERO(pubKey, pubKeyLen);
+        if (chainCode != NULL) {
+            MEMZERO(chainCode, 32);
+        }
     }
     return error;
 }
@@ -131,7 +136,10 @@ zxerr_t crypto_sign_eth(uint8_t *buffer, uint16_t signatureMaxlen, const uint8_t
 
     uint8_t message_digest[KECCAK_256_SIZE] = {0};
     if (hash) {
-        CHECK_ZXERR(keccak_digest(message, messageLen, message_digest, KECCAK_256_SIZE))
+        if (keccak_digest(message, messageLen, message_digest, KECCAK_256_SIZE) != zxerr_ok) {
+            MEMZERO(message_digest, sizeof(message_digest));
+            return zxerr_invalid_crypto_settings;
+        }
     } else {
         if (messageLen > KECCAK_256_SIZE) {
             return zxerr_invalid_crypto_settings;
@@ -141,6 +149,7 @@ zxerr_t crypto_sign_eth(uint8_t *buffer, uint16_t signatureMaxlen, const uint8_t
 
     unsigned int info = 0;
     zxerr_t error = _sign(buffer, signatureMaxlen, message_digest, KECCAK_256_SIZE, sigSize, &info);
+    MEMZERO(message_digest, sizeof(message_digest));
     if (error != zxerr_ok) {
         return zxerr_invalid_crypto_settings;
     }
@@ -169,8 +178,10 @@ zxerr_t crypto_fillEthAddress(uint8_t *buffer, uint16_t buffer_len, uint16_t *ad
     MEMZERO(buffer, buffer_len);
     answer_eth_t *const answer = (answer_eth_t *)buffer;
 
+    // SDK writes 32 bytes when chain_code != NULL; skip with NULL otherwise.
+    uint8_t *const chain_code_out = (peaq_chain_code == P2_CHAINCODE) ? answer->chainCode : NULL;
     CHECK_ZXERR(crypto_extractUncompressedPublicKey(&answer->publicKey[1], sizeof_field(answer_eth_t, publicKey) - 1,
-                                                    &peaq_chain_code))
+                                                    chain_code_out))
 
     answer->publicKey[0] = SECP256K1_PK_LEN;
 
@@ -188,6 +199,10 @@ zxerr_t crypto_fillEthAddress(uint8_t *buffer, uint16_t buffer_len, uint16_t *ad
     MEMCPY(answer->address + 1, str, 40);
 
     *addrLen = sizeof_field(answer_eth_t, publicKey) + sizeof_field(answer_eth_t, address);
+    if (peaq_chain_code == P2_CHAINCODE) {
+        *addrLen += sizeof_field(answer_eth_t, chainCode);
+    }
 
+    MEMZERO(hash, sizeof(hash));
     return zxerr_ok;
 }
